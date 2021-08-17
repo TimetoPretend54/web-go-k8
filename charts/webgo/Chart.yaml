@@ -9,3 +9,8 @@ version: 1.0.9
 
 # This is the version number of the application being deployed.
 appVersion: 1.0.10
+
+dependencies:
+  - name: ingress-nginx
+    version: 3.34.0
+    respository: https://kubernetes.github.io/ingress-nginx
