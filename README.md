@@ -23,7 +23,7 @@ NOTES:
    docker build -t {DockerID}/webgo .
    docker push {DockerID}/webgo
    ```
-2. **(OPTIONAL)** Modify `values.yaml`
+2. **(OPTIONAL)** Modify `charts/webgo/values.yaml`
    ```yaml
    image:
     repository: {DockerID}/webgo # UPDATE LINE TO DOCKERID
