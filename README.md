@@ -2,10 +2,11 @@
 
 Single Go prototype application utilizing Docker, Kubernetes, and Helm to Deploy to a Kubernetes Cluster.
 
-Thank you to https://github.com/nwillc for the original webgo project.
-Forked from https://github.com/nwillc/webgo
 
-Project was forked for additional experimentation/configuration/personal learning.
+NOTES:
+- Thank you to https://github.com/nwillc for the original webgo project.
+- Forked from https://github.com/nwillc/webgo
+- Forked for additional experimentation/configuration/personal learning.
 
 # Running Application
  REQUIREMENTS:
@@ -22,7 +23,7 @@ Project was forked for additional experimentation/configuration/personal learnin
    docker build -t {DockerID}/webgo .
    docker push {DockerID}/webgo
    ```
-2. **(OPTIONAL)** Modify `values.yaml` (line 8)
+2. **(OPTIONAL)** Modify `values.yaml`
    ```yaml
    image:
     repository: {DockerID}/webgo # UPDATE LINE TO DOCKERID
