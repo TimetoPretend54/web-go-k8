@@ -29,7 +29,7 @@ service:
   port: 8888
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
   hosts:
     - host: kubernetes.docker.internal   # MODIFY IF DESIRED

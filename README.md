@@ -57,23 +57,14 @@ NOTES:
    ```
 
 ## Exiting/Cleaning up Application
-1. Find/validate the webgo helm release
-   ```bash
-   helm ls -A
-   ```
-2. Uninstall the webgo helm release
+1. Uninstall the webgo helm release
    ```
    helm uninstall -n local-dev webgo
    ```
-3. **(Optional)** Delete `local-dev` namespace
+2. Delete `local-dev` namespace
    ```bash
    kubectl delete namespace local-dev
    ```
-4. **(Optional)** Set namespace back to `default` (or whatever you prefer)
-   ```bash
-   kubectl config set-context --current --namespace=default
-   ```
-
 ## About Ingress Hostname Resolution
 - Docker Desktop automatically adds a host file entry 
   ```
