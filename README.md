@@ -16,20 +16,21 @@ NOTES:
  - [DockerHub](https://hub.docker.com/****) Account/Login
 
 ## Running Application
-1. **(OPTIONAL)** Push Docker Image to DockerHub
+
+## Optional Steps
+1. Push Docker Image to DockerHub
    ```bash 
    docker login -u {DockerID}
    docker build -t {DockerID}/webgo .
    docker push {DockerID}/webgo
    ```
-2. **(OPTIONAL)** Modify `charts/webgo/values.yaml`
+2. Modify `charts/webgo/values.yaml`
    ```yaml
    image:
     repository: {DockerID}/webgo # UPDATE LINE TO DOCKERID
     ...
    ```
-
-   (**IF NOT USING Docker Desktop Kubernetes**) Also modify 
+3. (**IF NOT USING [Docker Desktop Kubernetes](https://docs.docker.com/desktop/kubernetes/#enable-kubernetes)**) Modify `charts/webgo/values.yaml` 
    ```yaml
    ingress:
     ...
@@ -38,40 +39,19 @@ NOTES:
     ...
    ```
    - Kubernetes has a [Ingress minikube Guide ](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/#create-an-ingress-resource) for example
-3. Connect to Desired K8 Cluster
-   - _example w/ `Docker Desktop Kubernetes`_
-      1. Follow [Docker Desktop - Enable Kubernetes](https://docs.docker.com/desktop/kubernetes/#enable-kubernetes)
-      2. Change to Docker Desktop Context
-          ```bash
-          kubectl config get-contexts
-          kubectl config use-context docker-desktop
-          ```
-    - Other examples:
-      - [Minikube guide](https://minikube.sigs.k8s.io/docs/start/)
-      - [Google Cloud GKE guide](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl)
-4. Deploy to K8 Cluster with Helm
-   
-   **Dry Run**
+
+## Core Steps
+1. Connect to Desired K8 Cluster ([Minikube guide](https://minikube.sigs.k8s.io/docs/start/), [Google Cloud GKE guide](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl), [Docker Desktop Kubernetes guide](https://docs.docker.com/desktop/kubernetes/#enable-kubernetes) )
    ```bash
-   helm upgrade --values config.yaml -i webgo --dry-run --debug ./charts/webgo -n local-dev --create-namespace
+   kubectl config get-contexts
+   kubectl config use-context {desiredContext}
    ```
-   **Deployment** (This will be a liner once helm adds [this commit](https://github.com/helm/helm/commit/d6eab468762e4020b49d1852de5b2df53f194eb5#diff-8f7c1d7e2cfeb70c465f36198e54a053fb517420d8647ffaf72a15e5525eb596) to a release)
+2. Deploy to K8 Cluster with Helm (shorcut [commit](https://github.com/helm/helm/commit/d6eab468762e4020b49d1852de5b2df53f194eb5#diff-8f7c1d7e2cfeb70c465f36198e54a053fb517420d8647ffaf72a15e5525eb596) waiting for release)
    ```bash
    helm dependency update ./charts/webgo
    helm upgrade --values config.yaml -i webgo ./charts/webgo -n local-dev --create-namespace
    ```
-5. Change to `local-dev` namespace (Helm Chart created resources under this)
-   ```bash
-   kubectl config set-context --current --namespace=local-dev
-   ```
-6. Run Application
-   
-   **Check that it worked**
-   ```bash
-   helm ls
-   kubectl get pods
-   ```
-   **Run/Access Application** (may take a few seconds/minutes to startup)
+3. Run Application (May take a few seconds/minutes to startup)
    ```bash
    curl http://kubernetes.docker.internal
    ```
@@ -79,7 +59,7 @@ NOTES:
 ## Exiting/Cleaning up Application
 1. Find/validate the webgo helm release
    ```bash
-   helm ls
+   helm ls -A
    ```
 2. Uninstall the webgo helm release
    ```
