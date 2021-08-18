@@ -4,11 +4,9 @@ Single Go prototype application utilizing Docker, Kubernetes, and Helm to Deploy
 
 
 NOTES:
-- Thank you to https://github.com/nwillc for the original webgo project.
 - Forked from https://github.com/nwillc/webgo
 - Forked for additional experimentation/configuration/personal learning.
 
-# Running Application
  REQUIREMENTS:
  - [Docker Desktop](https://www.docker.com/products/docker-desktop) Installed (Linux Containers)
    - Recommended: [Docker Desktop Kubernetes Enabled](https://docs.docker.com/desktop/kubernetes/#enable-kubernetes)
@@ -17,6 +15,7 @@ NOTES:
  - [Kubernetes (K8)](https://kubernetes.io/releases/download/) Installed (kubectl)
  - [DockerHub](https://hub.docker.com/****) Account/Login
 
+## Running Application
 1. **(OPTIONAL)** Push Docker Image to DockerHub
    ```bash 
    docker login -u {DockerID}
@@ -39,7 +38,18 @@ NOTES:
     ...
    ```
    - Kubernetes has a [Ingress minikube Guide ](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/#create-an-ingress-resource) for example
-3. Deploy to K8 Cluster with Helm
+3. Connect to Desired K8 Cluster
+   - _example w/ `Docker Desktop Kubernetes`_
+      1. Follow [Docker Desktop - Enable Kubernetes](https://docs.docker.com/desktop/kubernetes/#enable-kubernetes)
+      2. Change to Docker Desktop Context
+          ```bash
+          kubectl config get-contexts
+          kubectl config use-context docker-desktop
+          ```
+    - Other examples:
+      - [Minikube guide](https://minikube.sigs.k8s.io/docs/start/)
+      - [Google Cloud GKE guide](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl)
+4. Deploy to K8 Cluster with Helm
    
    **Dry Run**
    ```bash
@@ -50,11 +60,11 @@ NOTES:
    helm dependency update ./charts/webgo
    helm upgrade --values config.yaml -i webgo ./charts/webgo -n local-dev --create-namespace
    ```
-4. Change to `local-dev` namespace (Helm Chart created resources under this)
+5. Change to `local-dev` namespace (Helm Chart created resources under this)
    ```bash
    kubectl config set-context --current --namespace=local-dev
    ```
-5. Run Application
+6. Run Application
    
    **Check that it worked**
    ```bash
@@ -66,7 +76,7 @@ NOTES:
    curl http://kubernetes.docker.internal
    ```
 
-# Exiting/Cleaning up Application
+## Exiting/Cleaning up Application
 1. Find/validate the webgo helm release
    ```bash
    helm ls
@@ -84,7 +94,7 @@ NOTES:
    kubectl config set-context --current --namespace=default
    ```
 
-# About Ingress Hostname Resolution
+## About Ingress Hostname Resolution
 - Docker Desktop automatically adds a host file entry 
   ```
   127.0.0.1 kubernetes.docker.internal
@@ -101,3 +111,7 @@ NOTES:
   - [Google has a guide around configuring domain names w/ static IP address](https://cloud.google.com/kubernetes-engine/docs/tutorials/configuring-domain-name-static-ip) walking through the basic concepts.
   - Here is a [GoDaddy article outlining why you need to modify the etc/hosts for local development](https://www.godaddy.com/help/preview-your-website-using-hosts-files-3354)
   - [Stack Overflow Related Question](https://stackoverflow.com/questions/55087898/kube-ingress-with-hostname-how-to-know-ip-to-forward-domain-name)
+
+  ## Helpful Tools/Resources
+  - [kubectx](https://github.com/ahmetb/kubectx) - Power Tools for kubectl
+  - [kube-ps1](https://github.com/jonmosco/kube-ps1) - Kubernetes prompt for bash & zsh
