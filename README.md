@@ -35,10 +35,14 @@ NOTES:
    ingress:
     ...
     hosts:
-      - host: {ENTER HOSTNAME HERE} # IF NOT USING Docker Desktop K8 Cluster
+      - host: {HOSTNAME} # IF NOT USING Docker Desktop K8 Cluster
     ...
    ```
    - Kubernetes has a [Ingress minikube Guide ](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/#create-an-ingress-resource) for example
+     - NOTE: If using Ingress minikube, remember to add the following:
+     ```
+     minikube addons enable ingress
+     ```
 
 ## Core Steps
 1. Connect to Desired K8 Cluster ([Minikube guide](https://minikube.sigs.k8s.io/docs/start/), [Google Cloud GKE guide](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl), [Docker Desktop Kubernetes guide](https://docs.docker.com/desktop/kubernetes/#enable-kubernetes) )
@@ -53,7 +57,7 @@ NOTES:
    ```
 3. Run Application (May take a few seconds/minutes to startup)
    ```bash
-   curl http://kubernetes.docker.internal
+   curl http://{HOSTNAME}
    ```
 
 ## Exiting/Cleaning up Application
