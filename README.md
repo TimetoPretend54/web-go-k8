@@ -8,17 +8,17 @@ NOTES:
 - Forked for additional experimentation/configuration/personal learning.
 
  REQUIREMENTS:
- - [Docker Desktop](https://www.docker.com/products/docker-desktop) Installed (Linux Containers)
-   - Recommended: [Docker Desktop Kubernetes Enabled](https://docs.docker.com/desktop/kubernetes/#enable-kubernetes)
+ - [Docker](https://docs.docker.com/get-docker/) Installed (Linux Containers)
+     - Recommended: [Docker Desktop](https://www.docker.com/products/docker-desktop) Installed, [Docker Desktop Kubernetes Enabled](https://docs.docker.com/desktop/kubernetes/#enable-kubernetes)
  - [Go Lang](https://golang.org/doc/install) Installed
  - [Helm](https://helm.sh/docs/intro/install/) Installed
  - [Kubernetes (K8)](https://kubernetes.io/releases/download/) Installed (kubectl)
- - [DockerHub](https://hub.docker.com/****) Account/Login
+ - (Optional) [DockerHub](https://hub.docker.com/****) Account/Login
 
 ## Running Application
 
 ## Optional Steps
-1. Push Docker Image to DockerHub
+1. Push Docker Image to DockerHub (or other Container Registry)
    ```bash 
    docker login -u {DockerID}
    docker build -t {DockerID}/webgo .
