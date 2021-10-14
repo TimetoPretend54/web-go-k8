@@ -30,7 +30,7 @@ NOTES:
     repository: {DockerID}/webgo # UPDATE LINE TO DOCKERID
     ...
    ```
-3. (**IF NOT USING [Docker Desktop Kubernetes](https://docs.docker.com/desktop/kubernetes/#enable-kubernetes)**) Modify `charts/webgo/values.yaml` 
+3. (**IF NOT USING [Docker Desktop Kubernetes](https://docs.docker.com/desktop/kubernetes/#enable-kubernetes)**) Modify [`charts/webgo/values.yaml`](https://github.com/TimetoPretend54/web-go-k8/blob/main/charts/webgo/values.yaml)
    ```yaml
    ingress:
     ...
@@ -55,7 +55,7 @@ NOTES:
    helm dependency update ./charts/webgo
    helm upgrade --values config.yaml -i webgo ./charts/webgo -n local-dev --create-namespace
    ```
-3. Run Application (May take a few seconds/minutes to startup, `{HOSTNAME}` default is `kubernetes.docker.internal`)
+3. Run Application (May take a few seconds/minutes to startup)
    ```bash
    curl http://{HOSTNAME}
    ```
