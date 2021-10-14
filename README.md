@@ -55,7 +55,7 @@ NOTES:
    helm dependency update ./charts/webgo
    helm upgrade --values config.yaml -i webgo ./charts/webgo -n local-dev --create-namespace
    ```
-3. Run Application (May take a few seconds/minutes to startup, {HOSTNAME default is `kubernetes.docker.internal`)
+3. Run Application (May take a few seconds/minutes to startup, `{HOSTNAME}` default is `kubernetes.docker.internal`)
    ```bash
    curl http://{HOSTNAME}
    ```
